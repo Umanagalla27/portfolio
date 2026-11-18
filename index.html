@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uma Nagalla | Generative AI Engineer</title>
+  <meta name="description" content="Portfolio of Uma Nagalla — Generative AI Engineer specialising in Advanced RAG, Multi-Agent Systems (LangGraph, CrewAI, MCP), and production AI infrastructure for Banking, Legal, and Healthcare." />
+  <meta name="keywords" content="Generative AI, LLMOps, RAG, LangGraph, vLLM, FastMCP, AWS Bedrock, Kubernetes, Terraform, AI Engineer, Hyderabad" />
+  <meta name="author" content="Uma Nagalla" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Uma Nagalla | Generative AI Engineer" />
+  <meta property="og:description" content="Production-grade LLM systems, advanced RAG, multi-agent workflows, and secure AI infrastructure for regulated enterprises." />
+  <meta property="og:site_name" content="Uma Nagalla Portfolio" />
+
+  <!-- Favicon Monogram "UN" -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230A0E1A'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='44' font-weight='900' fill='%2322D3EE'>UN</text></svg>" />
+
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#0A0E1A',
+            cardDark: 'rgba(17, 24, 39, 0.72)',
+            borderDark: 'rgba(255, 255, 255, 0.08)',
+            violetAccent: '#7C5CFF',
+            cyanAccent: '#22D3EE',
+            awsOrange: '#FF9900',
+          },
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 4s ease-in-out infinite',
+            'flow-dash': 'dash 1.8s linear infinite',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.85' },
+            },
+            dash: {
+              to: { strokeDashoffset: '-20' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Utilities */
+    .glass-card {
+      background: rgba(17, 24, 39, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dark .glass-card:hover {
+      border-color: rgba(124, 92, 255, 0.45);
+      box-shadow: 0 12px 36px -10px rgba(124, 92, 255, 0.22);
+      transform: translateY(-4px);
+    }
+    .light body {
+      background-color: #F8FAFC !important;
+      color: #0F172A !important;
+    }
+    .light .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      color: #1E293B;
+    }
+    .light .glass-card:hover {
+      border-color: rgba(124, 92, 255, 0.4);
+      box-shadow: 0 16px 40px rgba(124, 92, 255, 0.12);
+      transform: translateY(-4px);
+    }
+    .light .text-white {
+      color: #0F172A !important;
+    }
+    .light .text-slate-300, .light .text-slate-400 {
+      color: #475569 !important;
+    }
+    .light header {
+      background: rgba(255, 255, 255, 0.85) !important;
+      border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #FFFFFF 0%, #22D3EE 50%, #7C5CFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .light .gradient-text {
+      background: linear-gradient(135deg, #0F172A 0%, #0284C7 50%, #7C5CFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #7C5CFF 0%, #22D3EE 100%);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0A0E1A; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #7C5CFF; }
+  </style>
+</head>
+
+<body class="bg-bgDark text-slate-200 font-body antialiased selection:bg-cyanAccent selection:text-bgDark transition-colors duration-300 overflow-x-hidden">
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-3 px-5 py-3.5 rounded-xl glass-card border border-cyanAccent/40 shadow-2xl text-sm font-medium">
+    <span class="text-cyanAccent" id="toast-icon">✓</span>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <!-- PROJECT DEEP-DIVE MODAL -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto glass-card rounded-2xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl text-left transition-all my-auto" onclick="event.stopPropagation()">
+      <button onclick="closeModal()" class="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-700 transition" aria-label="Close modal">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- STICKY GLASS NAVBAR -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-bgDark/80 backdrop-blur-xl border-b border-borderDark transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Monogram Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl gradient-accent p-[2px] flex items-center justify-center shadow-lg shadow-violetAccent/20 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-bgDark rounded-[10px] flex items-center justify-center font-heading font-black text-lg text-cyanAccent tracking-wider">
+            UN
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-bold text-lg text-white group-hover:text-cyanAccent transition-colors">UMA NAGALLA</span>
+          <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase">GenAI Engineer</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium text-slate-300">
+        <a href="#about" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">About</a>
+        <a href="#expertise" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Expertise</a>
+        <a href="#projects" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Projects</a>
+        <a href="#experience" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Experience</a>
+        <a href="#tech" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Tech Stack</a>
+        <a href="#domain" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Domains</a>
+        <a href="#contact" class="px-3 py-1.5 rounded-lg hover:text-cyanAccent transition-colors">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="hidden sm:flex items-center gap-3">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2.5 rounded-xl border border-borderDark hover:border-cyanAccent/50 bg-slate-800/40 text-slate-300 hover:text-white transition" title="Toggle Light/Dark Theme">
+          <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="theme-icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <a href="#contact" class="px-4 py-2 rounded-xl text-xs font-mono font-semibold uppercase tracking-wider text-white gradient-accent hover:opacity-95 shadow-md shadow-violetAccent/25 hover:shadow-cyanAccent/25 transition">
+          Let's Talk
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button id="theme-toggle-mobile" class="p-2 rounded-lg border border-borderDark text-slate-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </button>
+        <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-300 hover:text-white border border-borderDark" aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pt-3 pb-6 border-b border-borderDark bg-bgDark/95 backdrop-blur-2xl space-y-3 text-sm">
+      <a href="#about" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">About</a>
+      <a href="#expertise" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Core Expertise</a>
+      <a href="#projects" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Featured Projects</a>
+      <a href="#experience" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Experience</a>
+      <a href="#tech" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Tech Stack</a>
+      <a href="#domain" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Regulated Domains</a>
+      <a href="#contact" class="block py-2 text-slate-300 hover:text-cyanAccent" onclick="toggleMobileMenu()">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+    <!-- 1. HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+      <!-- Interactive Neural Canvas -->
+      <canvas id="neural-canvas" class="absolute inset-0 w-full h-full pointer-events-auto opacity-60 dark:opacity-75"></canvas>
+
+      <!-- Soft Neon Ambient Glows -->
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-violetAccent/20 rounded-full blur-[140px] pointer-events-none animate-glow-pulse"></div>
+      <div class="absolute top-1/3 -right-20 w-96 h-96 bg-cyanAccent/15 rounded-full blur-[140px] pointer-events-none animate-glow-pulse" style="animation-delay: 2s;"></div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        <!-- Location & Status Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyanAccent/30 text-xs font-mono mb-8 text-slate-300 shadow-sm">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>📍 Hyderabad, India</span>
+          <span class="text-slate-600">|</span>
+          <span class="text-cyanAccent">Available for Enterprise GenAI Roles</span>
+        </div>
+
+        <!-- Name Heading -->
+        <h1 class="text-5xl sm:text-7xl lg:text-8xl font-heading font-extrabold tracking-tight mb-4">
+          <span class="gradient-text">UMA NAGALLA</span>
+        </h1>
+
+        <!-- Typewriter Role Subtitle -->
+        <div class="h-10 sm:h-12 flex items-center justify-center mb-6">
+          <span class="text-lg sm:text-2xl font-mono text-slate-300 font-semibold">
+            I am a <span id="typewriter" class="text-cyanAccent font-bold"></span><span class="animate-pulse text-violetAccent">_</span>
+          </span>
+        </div>
+
+        <!-- Tagline -->
+        <p class="max-w-3xl text-base sm:text-lg lg:text-xl text-slate-300 font-normal leading-relaxed mb-10">
+          I build production-grade LLM systems — <span class="text-white font-medium">advanced RAG</span>, <span class="text-white font-medium">multi-agent workflows</span> and <span class="text-white font-medium">secure AI infrastructure</span> — for regulated <span class="text-cyanAccent font-medium">Banking</span>, <span class="text-cyanAccent font-medium">Legal</span> and <span class="text-cyanAccent font-medium">Healthcare</span> clients.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <a href="#projects" class="px-8 py-3.5 rounded-xl font-heading font-semibold text-sm text-white gradient-accent hover:opacity-95 shadow-lg shadow-violetAccent/30 hover:scale-[1.02] transition-transform">
+            View Projects →
+          </a>
+          <a href="#resume" onclick="showToast('Resume PDF link placeholder. Direct CV available upon request!')" class="px-8 py-3.5 rounded-xl font-heading font-semibold text-sm text-slate-200 glass-card border border-slate-700 hover:border-cyanAccent hover:text-cyanAccent transition-all">
+            Download Resume 📄
+          </a>
+          <a href="#contact" class="px-8 py-3.5 rounded-xl font-heading font-semibold text-sm text-slate-300 hover:text-white hover:underline transition">
+            Let's Connect
+          </a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex items-center gap-6 mb-16 text-slate-400">
+          <a href="https://linkedin.com/in/uma-n-3619b2450" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-cyanAccent hover:scale-110 transition" aria-label="LinkedIn Profile">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="mailto:umanagalla009@gmail.com" class="p-2.5 rounded-xl glass-card hover:text-cyanAccent hover:scale-110 transition" aria-label="Email Me">
+            <svg class="w-5 h-5 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://github.com/Umanagalla27" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-cyanAccent hover:scale-110 transition" aria-label="GitHub Profile">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+        </div>
+
+        <!-- 4 Animated Stat Counters -->
+        <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+          <div class="glass-card p-5 rounded-2xl border border-borderDark flex flex-col items-center">
+            <span class="text-3xl sm:text-4xl font-heading font-extrabold text-white"><span class="counter" data-target="3">0</span>+</span>
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 mt-1">Years Experience</span>
+          </div>
+          <div class="glass-card p-5 rounded-2xl border border-borderDark flex flex-col items-center">
+            <span class="text-3xl sm:text-4xl font-heading font-extrabold text-cyanAccent"><span class="counter" data-target="3">0</span></span>
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 mt-1">Regulated Domains</span>
+          </div>
+          <div class="glass-card p-5 rounded-2xl border border-borderDark flex flex-col items-center">
+            <span class="text-3xl sm:text-4xl font-heading font-extrabold text-violetAccent"><span class="counter" data-target="50">0</span>-Scenario</span>
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 mt-1">Agent Benchmark</span>
+          </div>
+          <div class="glass-card p-5 rounded-2xl border border-borderDark flex flex-col items-center">
+            <span class="text-3xl sm:text-4xl font-heading font-extrabold text-emerald-400">0</span>
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 mt-1">High/Crit CVEs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="py-24 relative border-t border-borderDark">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+          <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Engineering Philosophy</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white mb-10">About Me</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Main Confident Paragraph -->
+          <div class="lg:col-span-8 glass-card p-8 rounded-2xl border border-borderDark text-slate-300 leading-relaxed text-base sm:text-lg">
+            <p class="mb-5">
+              I'm a Generative AI Engineer with <span class="text-white font-semibold">3+ years of experience</span> taking LLM-powered systems from prototype to production for North American Banking, Legal and Healthcare clients. I specialise in <span class="text-cyanAccent font-medium">advanced Retrieval-Augmented Generation</span> (hybrid search, Reciprocal Rank Fusion, cross-encoder reranking), <span class="text-violetAccent font-medium">multi-agent workflows</span> with LangGraph, CrewAI and Model Context Protocol (MCP), and <span class="text-white font-medium">LLM fine-tuning</span> with QLoRA/PEFT served efficiently through vLLM.
+            </p>
+            <p>
+              I ship on AWS (Bedrock, Lambda, ECS, RDS) and Azure AI with FastAPI, Docker, Kubernetes and Terraform — backed by GitOps, RAGAS evaluation, Langfuse/Prometheus/Grafana observability and AI guardrails. I believe LLM systems deserve the same rigour as any production microservice: <span class="text-cyanAccent font-semibold underline decoration-violetAccent underline-offset-4">evaluated, observable, secure and auditable</span>.
+            </p>
+          </div>
+
+          <!-- Side Highlight Cards -->
+          <div class="lg:col-span-4 flex flex-col gap-4">
+            <!-- AWS Cert Card -->
+            <div class="glass-card p-5 rounded-2xl border border-awsOrange/30 flex items-center gap-4 bg-gradient-to-br from-awsOrange/10 to-transparent">
+              <div class="w-12 h-12 rounded-xl bg-awsOrange/20 border border-awsOrange/40 flex items-center justify-center text-awsOrange font-mono font-bold text-lg">
+                ☁️
+              </div>
+              <div>
+                <div class="text-xs font-mono uppercase tracking-wider text-awsOrange font-bold">AWS Certified</div>
+                <div class="text-sm font-heading font-semibold text-white">Cloud Practitioner</div>
+                <div class="text-[11px] text-slate-400">Validated Cloud Architecture</div>
+              </div>
+            </div>
+
+            <!-- Education Card -->
+            <div class="glass-card p-5 rounded-2xl border border-cyanAccent/30 flex items-center gap-4 bg-gradient-to-br from-cyanAccent/10 to-transparent">
+              <div class="w-12 h-12 rounded-xl bg-cyanAccent/20 border border-cyanAccent/40 flex items-center justify-center text-cyanAccent font-mono font-bold text-lg">
+                🎓
+              </div>
+              <div>
+                <div class="text-xs font-mono uppercase tracking-wider text-cyanAccent font-bold">B.Tech ECE – 2023</div>
+                <div class="text-sm font-heading font-semibold text-white">Malla Reddy Inst. of Tech</div>
+                <div class="text-[11px] text-slate-400">Electronics & Communication</div>
+              </div>
+            </div>
+
+            <!-- Languages Card -->
+            <div class="glass-card p-5 rounded-2xl border border-violetAccent/30 flex items-center gap-4 bg-gradient-to-br from-violetAccent/10 to-transparent">
+              <div class="w-12 h-12 rounded-xl bg-violetAccent/20 border border-violetAccent/40 flex items-center justify-center text-violetAccent font-mono font-bold text-lg">
+                🌐
+              </div>
+              <div>
+                <div class="text-xs font-mono uppercase tracking-wider text-violetAccent font-bold">Communication</div>
+                <div class="text-sm font-heading font-semibold text-white">English · Telugu · Hindi</div>
+                <div class="text-[11px] text-slate-400">Cross-border stakeholder ready</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CORE EXPERTISE -->
+    <section id="expertise" class="py-24 relative">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-violetAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-violetAccent">Specialization</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Core Expertise</h2>
+          <p class="text-slate-400 mt-2 text-sm">Deep engineering capability across the entire production generative AI lifecycle.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 1. Advanced RAG -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-violetAccent/15 border border-violetAccent/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                🔍
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Advanced RAG</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Hybrid search combining pgvector (dense HNSW) with BM25 (sparse keyword), Reciprocal Rank Fusion (RRF), cross-encoder reranking, and citation grounding for audit-ready precision.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyanAccent">pgvector</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyanAccent">BM25</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyanAccent">RRF</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyanAccent">Cross-Encoder</span>
+            </div>
+          </div>
+
+          <!-- 2. Agentic AI -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-cyanAccent/15 border border-cyanAccent/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                🤖
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Agentic AI</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Autonomous and supervised agent architectures with LangGraph, CrewAI, and FastMCP. Stateful PostgreSQL checkpointing and human-in-the-loop (HITL) approval gates for mission-critical actions.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-violetAccent">LangGraph</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-violetAccent">CrewAI</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-violetAccent">FastMCP</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-violetAccent">HITL</span>
+            </div>
+          </div>
+
+          <!-- 3. Fine-Tuning & Serving -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                🧠
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Fine-Tuning & Serving</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Parameter-efficient fine-tuning (QLoRA, LoRA, PEFT) on PyTorch. High-throughput, low-latency deployment with AWQ/GGUF quantization, vLLM continuous batching, and llama.cpp.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-pink-400">QLoRA</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-pink-400">PEFT</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-pink-400">vLLM</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-pink-400">AWQ/GGUF</span>
+            </div>
+          </div>
+
+          <!-- 4. AI Safety & Evaluation -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                🛡️
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">AI Safety & Evaluation</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Automated quality gates via RAGAS (faithfulness, answer relevance, context recall) and Langfuse distributed tracing. Strict PII redaction, prompt injection defense, and RBAC tool allowlists.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-400">RAGAS</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-400">Langfuse</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-emerald-400">PII Guardrails</span>
+            </div>
+          </div>
+
+          <!-- 5. Cloud AI -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                ☁️
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">Cloud AI</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Production architecture on Amazon Bedrock (Agents, Knowledge Bases, Guardrails, Claude 3.5, Titan Embeddings), SageMaker endpoints, Azure AI Foundry, and Azure OpenAI Service.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-400">AWS Bedrock</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-400">Azure AI</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-400">Claude 3.5</span>
+            </div>
+          </div>
+
+          <!-- 6. DevOps & SRE -->
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                ⚙️
+              </div>
+              <h3 class="font-heading font-bold text-lg text-white mb-2">DevOps & SRE</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                Declarative Terraform IaC, hardened non-root containerization, Kubernetes with Helm (HPA, PDB, NetworkPolicies), ArgoCD GitOps, Prometheus alerts, and Grafana performance telemetry.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-800">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-blue-400">Terraform</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-blue-400">Kubernetes</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-blue-400">ArgoCD</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-blue-400">Trivy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. FEATURED PROJECTS -->
+    <section id="projects" class="py-24 relative border-t border-borderDark bg-slate-950/40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+              <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Production Engineering</span>
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white">Featured Projects</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">Click any project card to inspect deep architectural specifications & benchmarks.</p>
+          </div>
+        </div>
+
+        <div class="space-y-12" id="projects-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EXPERIENCE SECTION -->
+    <section id="experience" class="py-24 relative border-t border-borderDark">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Career Trajectory</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Work Experience</h2>
+        </div>
+
+        <!-- Vertical Timeline -->
+        <div class="relative border-l-2 border-slate-800 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12">
+          
+          <!-- Role 1: Arah Infotech -->
+          <div class="relative group">
+            <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-bgDark border-4 border-cyanAccent group-hover:border-violetAccent transition-colors"></div>
+
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border border-borderDark">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl sm:text-2xl font-heading font-bold text-white">
+                  Generative AI Engineer
+                </h3>
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/20">
+                  Sep 2025 – Present
+                </span>
+              </div>
+
+              <!-- Company link -->
+              <div class="flex items-center gap-2 text-slate-300 font-medium text-sm mb-3">
+                <a href="https://arahinfotech.net/" target="_blank" rel="noopener noreferrer" class="hover:text-cyanAccent inline-flex items-center gap-1.5 transition underline decoration-slate-600 underline-offset-4">
+                  <span>Arah Infotech</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+                <span>•</span>
+                <span class="text-slate-400">Hyderabad | Clients: North American Banking, Legal & Healthcare</span>
+              </div>
+
+              <!-- Collapsible Sub-sections -->
+              <div class="space-y-3 mt-6">
+                <div class="border border-slate-800 rounded-xl overflow-hidden">
+                  <button onclick="toggleAccordion('exp-1-1')" class="w-full flex items-center justify-between p-4 bg-slate-900/60 text-left hover:bg-slate-800/60 transition">
+                    <span class="font-heading font-semibold text-sm text-cyanAccent flex items-center gap-2">
+                      <span>🔍</span> Advanced RAG & Knowledge Systems
+                    </span>
+                    <span id="exp-1-1-arrow" class="text-slate-400 text-xs">▼</span>
+                  </button>
+                  <div id="exp-1-1" class="p-4 text-sm text-slate-300 space-y-2 border-t border-slate-800/60 bg-slate-950/40">
+                    <p>• Enterprise RAG over banking policies, legal documents, and healthcare guidelines using hybrid search (pgvector + BM25), Reciprocal Rank Fusion, and cross-encoder reranking.</p>
+                    <p>• Engineered secure ingestion pipeline featuring intelligent chunking, automated PII detection/redaction, sensitivity labelling, and access-control metadata.</p>
+                    <p>• Established automated RAGAS evaluation with quality gates in GitHub Actions to block regressions in faithfulness, context recall, and groundedness.</p>
+                    <p>• Configured Amazon Bedrock (Claude 3.5, Titan Embeddings) selected per specific use case based on trade-offs between precision, latency, and cost.</p>
+                  </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden">
+                  <button onclick="toggleAccordion('exp-1-2')" class="w-full flex items-center justify-between p-4 bg-slate-900/60 text-left hover:bg-slate-800/60 transition">
+                    <span class="font-heading font-semibold text-sm text-violetAccent flex items-center gap-2">
+                      <span>🤖</span> Multi-Agent Systems & Tool Calling
+                    </span>
+                    <span id="exp-1-2-arrow" class="text-slate-400 text-xs">▼</span>
+                  </button>
+                  <div id="exp-1-2" class="p-4 text-sm text-slate-300 space-y-2 border-t border-slate-800/60 bg-slate-950/40">
+                    <p>• Developed LangGraph, LangChain, and CrewAI workflows with Model Context Protocol (MCP) tool integration, PostgreSQL checkpointing, and human-in-the-loop approval gates.</p>
+                    <p>• Implemented specialised supervisor-worker agents for retrieval, legal compliance analysis, and automated remediation.</p>
+                    <p>• Built security guardrails enforcing prompt-injection defenses and role-based tool access allowlists tested against 50-scenario benchmark suites.</p>
+                  </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden">
+                  <button onclick="toggleAccordion('exp-1-3')" class="w-full flex items-center justify-between p-4 bg-slate-900/60 text-left hover:bg-slate-800/60 transition">
+                    <span class="font-heading font-semibold text-sm text-pink-400 flex items-center gap-2">
+                      <span>🧠</span> ML, DL & Model Serving
+                    </span>
+                    <span id="exp-1-3-arrow" class="text-slate-400 text-xs">▼</span>
+                  </button>
+                  <div id="exp-1-3" class="p-4 text-sm text-slate-300 space-y-2 border-t border-slate-800/60 bg-slate-950/40">
+                    <p>• Supervised QLoRA/PEFT parameter-efficient fine-tuning and domain-specific instruction tuning in PyTorch.</p>
+                    <p>• Packaged models with AWQ and GGUF quantization served high-throughput via vLLM continuous batching and llama.cpp.</p>
+                    <p>• Benchmarked Hugging Face open weights and tracked hyperparameter runs and artifact lineage with MLflow.</p>
+                  </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden">
+                  <button onclick="toggleAccordion('exp-1-4')" class="w-full flex items-center justify-between p-4 bg-slate-900/60 text-left hover:bg-slate-800/60 transition">
+                    <span class="font-heading font-semibold text-sm text-emerald-400 flex items-center gap-2">
+                      <span>⚙️</span> Cloud & DevOps / SRE
+                    </span>
+                    <span id="exp-1-4-arrow" class="text-slate-400 text-xs">▼</span>
+                  </button>
+                  <div id="exp-1-4" class="p-4 text-sm text-slate-300 space-y-2 border-t border-slate-800/60 bg-slate-950/40">
+                    <p>• Provisioned AWS infrastructure (Bedrock, Lambda, S3, ECS Fargate, RDS PostgreSQL, VPC, Secrets Manager) using modular Terraform.</p>
+                    <p>• Orchestrated Kubernetes workloads using Helm charts configured with HPA, PodDisruptionBudgets, and NetworkPolicies.</p>
+                    <p>• Implemented ArgoCD GitOps pipelines and GitHub Actions for continuous delivery of code, infra, and prompt graphs.</p>
+                    <p>• Built end-to-end observability with Langfuse, Prometheus, and Grafana dashboards tracking drift, latency, token consumption, and cost.</p>
+                    <p>• Enforced hardened non-root container images with Trivy vulnerability scanning, achieving 0 HIGH/CRITICAL CVEs.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 2: Vagarious Solutions -->
+          <div class="relative group">
+            <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-bgDark border-4 border-slate-600 group-hover:border-cyanAccent transition-colors"></div>
+
+            <div class="glass-card p-6 sm:p-8 rounded-2xl border border-borderDark">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <h3 class="text-xl sm:text-2xl font-heading font-bold text-white">
+                  Software Engineer
+                </h3>
+                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-slate-800 text-slate-300 border border-slate-700">
+                  Sep 2023 – Sep 2025
+                </span>
+              </div>
+
+              <!-- Company link -->
+              <div class="flex items-center gap-2 text-slate-300 font-medium text-sm mb-4">
+                <a href="https://in.linkedin.com/company/vagarious-solutions" target="_blank" rel="noopener noreferrer" class="hover:text-cyanAccent inline-flex items-center gap-1.5 transition underline decoration-slate-600 underline-offset-4">
+                  <span>Vagarious Solutions Pvt Ltd</span>
+                  <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+              </div>
+
+              <ul class="text-sm text-slate-300 space-y-2.5 list-disc list-inside">
+                <li>Applied ML using scikit-learn for text classification and multivariate anomaly detection (Isolation Forest); architected early RAG prototypes and semantic search systems.</li>
+                <li>Deployed scalable services on AWS (EC2, S3, Lambda) with Terraform and AWS CloudFormation.</li>
+                <li>Constructed CI/CD workflows using Jenkins and GitHub Actions with Docker containerization.</li>
+                <li>Authored Python backend microservices, REST APIs, and optimized SQL/PL-SQL queries on MySQL with comprehensive indexing.</li>
+                <li>Engineered ETL pipelines and Power BI business dashboards for self-service analytics.</li>
+                <li>Collaborated in fast-paced Agile sprint cycles via JIRA and maintained high-fidelity system documentation.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TECH STACK (INTERACTIVE FILTERABLE GRID) -->
+    <section id="tech" class="py-24 relative border-t border-borderDark">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Capability Matrix</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Technical Arsenal</h2>
+          <p class="text-slate-400 mt-2 text-sm">Filter tools, frameworks, and cloud services by domain expertise.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="tech-filters"></div>
+
+        <!-- Tech Tiles Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="tech-grid"></div>
+      </div>
+    </section>
+
+    <!-- 7. KEY ACHIEVEMENTS -->
+    <section id="achievements" class="py-24 relative border-t border-borderDark bg-slate-950/30">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-violetAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-violetAccent">Impact & Verification</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Key Achievements</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">🎯</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">High-Precision RAG</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Delivered production RAG pipelines with hybrid search, RRF and cross-encoder reranking that significantly increased retrieval precision for North American banking and legal teams.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">⚡</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">50-Scenario Agent Benchmark</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Designed LangGraph multi-agent incident workflows rigorously validated on a 50-scenario benchmark and a 20-fault chaos test suite.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">🛡️</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">Zero-Vulnerability Infra</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Shipped hardened, regulated-ready AI services with non-root Docker containers, Trivy scans (0 Critical CVEs), Helm, ArgoCD GitOps, and Terraform.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">📊</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">RAGAS Quality Gates</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Established continuous RAGAS evaluation and Langfuse distributed tracing so LLM quality, latency, cost, and reliability are monitored like tier-1 microservices.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">🔒</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">Comprehensive Guardrails</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Implemented end-to-end AI guardrails (PII redaction, prompt-injection defense, and RBAC allowlists) enabling safe, compliant LLM deployment.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark flex flex-col justify-start">
+            <div class="text-2xl mb-3">🔌</div>
+            <h3 class="font-heading font-semibold text-white text-base mb-2">FastMCP Tool Servers</h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Engineered FastMCP tool servers exposing controlled, audited, and strictly sandboxed tool surfaces to multi-agent graphs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. DOMAIN EXPERTISE -->
+    <section id="domain" class="py-24 relative border-t border-borderDark">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Regulated Environments</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Domain Expertise</h2>
+          <p class="text-slate-400 mt-2 text-sm">Deep understanding of enterprise compliance, model risk, and governance boundaries.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div class="glass-card p-6 rounded-2xl border border-borderDark text-left">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl mb-4">
+              🏦
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white mb-2">Banking & FinTech</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              GLBA & SOC2 compliance, financial calculation grounding, multi-tenant RBAC, audit logging, and anti-hallucination guardrails for risk-critical figures.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark text-left">
+            <div class="w-12 h-12 rounded-xl bg-violetAccent/10 border border-violetAccent/30 flex items-center justify-center text-2xl mb-4">
+              ⚖️
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white mb-2">Legal & Contracts</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Precision clause retrieval, paragraph-level citation grounding, attorney-client privilege protection, contract diffing, and auditable reasoning traces.
+            </p>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-borderDark text-left">
+            <div class="w-12 h-12 rounded-xl bg-cyanAccent/10 border border-cyanAccent/30 flex items-center justify-center text-2xl mb-4">
+              🏥
+            </div>
+            <h3 class="font-heading font-bold text-lg text-white mb-2">Healthcare</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              HIPAA & HITRUST alignment, automatic clinical PII/PHI redaction, strict clinician-in-the-loop validation, and guideline-grounded summarization.
+            </p>
+          </div>
+        </div>
+
+        <!-- Narrative Card -->
+        <div class="glass-card p-8 rounded-2xl border border-cyanAccent/20 text-slate-300 text-center max-w-4xl mx-auto leading-relaxed text-sm sm:text-base">
+          "I design RAG and multi-agent systems that respect data residency, access control, auditability, model risk and human-oversight expectations of North American regulated organisations — partnering with compliance, risk and legal teams to balance automation with regulation, and explaining <span class="text-cyanAccent font-medium">accuracy vs. latency vs. cost vs. risk trade-offs</span> clearly to technical and non-technical stakeholders."
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. EDUCATION & CERTIFICATIONS -->
+    <section id="education" class="py-24 relative border-t border-borderDark bg-slate-950/20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 mb-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-violetAccent"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-violetAccent">Credentials</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white">Education & Certifications</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Education -->
+          <div class="glass-card p-8 rounded-2xl border border-borderDark flex gap-5 items-start">
+            <div class="w-14 h-14 rounded-2xl bg-cyanAccent/10 border border-cyanAccent/30 flex items-center justify-center text-3xl shrink-0">
+              🎓
+            </div>
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-cyanAccent font-semibold">2019 – 2023</span>
+              <h3 class="text-lg font-heading font-bold text-white mt-1">Bachelor of Technology</h3>
+              <p class="text-sm font-medium text-slate-300">Electronics & Communication Engineering</p>
+              <p class="text-xs text-slate-400 mt-2">Malla Reddy Institute of Technology and Sciences, Hyderabad</p>
+            </div>
+          </div>
+
+          <!-- Certification -->
+          <div class="glass-card p-8 rounded-2xl border border-awsOrange/30 flex gap-5 items-start bg-gradient-to-br from-awsOrange/5 to-transparent">
+            <div class="w-14 h-14 rounded-2xl bg-awsOrange/15 border border-awsOrange/40 flex items-center justify-center text-awsOrange text-2xl font-black shrink-0 font-heading">
+              AWS
+            </div>
+            <div>
+              <span class="text-xs font-mono uppercase tracking-wider text-awsOrange font-bold">Official Credential</span>
+              <h3 class="text-lg font-heading font-bold text-white mt-1">AWS Certified Cloud Practitioner</h3>
+              <p class="text-sm font-medium text-slate-300">Amazon Web Services</p>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-awsOrange/10 text-awsOrange text-[11px] font-mono mt-2 border border-awsOrange/20">
+                ✓ Verified Cloud Architecture
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CONTACT -->
+    <section id="contact" class="py-24 relative border-t border-borderDark">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center gap-2 mb-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyanAccent"></span>
+          <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">Get in Touch</span>
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white mb-4">
+          Let's build intelligent systems together.
+        </h2>
+        <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-12">
+          Whether you're exploring enterprise RAG, autonomous multi-agent pipelines, or hardened LLM microservices, I'd love to connect.
+        </p>
+
+        <!-- Direct Actions Bar -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <button onclick="copyEmail()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass-card border border-borderDark hover:border-cyanAccent text-slate-200 text-sm font-medium transition group">
+            <svg class="w-4 h-4 text-cyanAccent group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>Copy: <strong class="text-white font-mono">umanagalla009@gmail.com</strong></span>
+          </button>
+
+          <a href="https://linkedin.com/in/uma-n-3619b2450" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass-card border border-borderDark hover:border-violetAccent text-slate-200 text-sm font-medium transition">
+            <svg class="w-4 h-4 text-violetAccent" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a href="https://github.com/Umanagalla27" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl glass-card border border-borderDark hover:border-slate-500 text-slate-200 text-sm font-medium transition">
+            <svg class="w-4 h-4 text-slate-300" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="glass-card p-8 rounded-3xl border border-borderDark max-w-xl mx-auto text-left shadow-2xl">
+          <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+            <div>
+              <label for="name" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Your Name</label>
+              <input type="text" id="name" required placeholder="Satya Nadella" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent transition text-sm" />
+            </div>
+
+            <div>
+              <label for="email" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Work Email</label>
+              <input type="email" id="email" required placeholder="satya@microsoft.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent transition text-sm" />
+            </div>
+
+            <div>
+              <label for="message" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Message / Project Inquiry</label>
+              <textarea id="message" rows="4" required placeholder="Hi Uma, we are building an enterprise compliance RAG pipeline and would love to connect..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent transition text-sm"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 rounded-xl font-heading font-bold text-white gradient-accent hover:opacity-95 shadow-lg shadow-violetAccent/25 hover:shadow-cyanAccent/30 transition-all text-sm tracking-wide uppercase">
+              Send Message 🚀
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-borderDark relative bg-bgDark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <div>
+        © 2026 Uma Nagalla · Built with <span class="text-pink-500">❤️</span> and AI
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="text-xs font-mono text-slate-400 hover:text-cyanAccent inline-flex items-center gap-1 transition">
+          <span>Back to Top</span>
+          <span>↑</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       DATA CONFIGURATION & JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    const PORTFOLIO_CONFIG = {
+      hero: {
+        name: "Uma Nagalla",
+        roles: [
+          "Generative AI Engineer",
+          "Agentic AI Builder",
+          "RAG Systems Specialist",
+          "LLMOps & DevOps Engineer"
+        ],
+        email: "umanagalla009@gmail.com",
+        linkedin: "https://linkedin.com/in/uma-n-3619b2450",
+        github: "https://github.com/Umanagalla27",
+        resumePlaceholder: "#resume"
+      },
+
+      projects: [
+        {
+          id: "aegis",
+          number: "01",
+          title: "Aegis Enterprise AI",
+          subtitle: "AIOps & Incident-Response Platform",
+          tag: "Featured Flagship",
+          overview: "An AI co-pilot for SRE teams that detects, diagnoses and safely remediates incidents. An AIOps platform combining anomaly detection, intelligent runbook retrieval and a dependency graph to help SRE teams find root causes faster — with strict human approval before any risky action.",
+          metrics: [
+            "50-Scenario Benchmark",
+            "20-Fault Chaos Suite",
+            "0 Critical CVEs"
+          ],
+          highlights: [
+            "Dual-layer anomaly detection: rolling Z-score + Isolation Forest to catch both sudden spikes and subtle multivariate anomalies.",
+            "Hybrid runbook retrieval using BM25 + Reciprocal Rank Fusion to surface the right remediation steps.",
+            "NetworkX service-dependency graph that traces the failure 'blast radius' across dependent microservices.",
+            "LangGraph incident workflow with PostgreSQL checkpointing and human-in-the-loop interrupts — no rollback runs without SRE approval.",
+            "Validated on a rigorous 50-scenario agent benchmark and a 20-fault chaos test suite.",
+            "Implemented a multi-head self-attention Transformer block from scratch in PyTorch for telemetry time-series representation.",
+            "FastMCP tool server with RBAC tool allowlists, PII redaction and prompt-injection defense.",
+            "Hardened non-root Docker image (Trivy-scanned, 0 HIGH/CRITICAL CVEs), Helm chart (HPA, PDB, NetworkPolicy), ArgoCD GitOps, and Terraform AWS infra."
+          ],
+          tech: [
+            "Python", "LangGraph", "FastAPI", "PyTorch", "scikit-learn", 
+            "NetworkX", "FastMCP", "PostgreSQL", "Redis", "Docker", 
+            "Helm", "ArgoCD", "Terraform", "Prometheus", "Grafana", 
+            "GitHub Actions", "Trivy"
+          ],
+          flowSteps: [
+            "Metrics & Logs",
+            "Dual Anomaly (Z-score + IsoForest)",
+            "Service Graph (Blast Radius)",
+            "Runbook RAG (BM25 + RRF)",
+            "LangGraph Agent",
+            "Human Approval Gate",
+            "Remediation"
+          ]
+        },
+        {
+          id: "rag-engine",
+          number: "02",
+          title: "Production RAG Engine",
+          subtitle: "Hybrid Search & Reranking for Regulated Documents",
+          tag: "Enterprise Retrieval",
+          overview: "A production-grade RAG engine designed for accuracy and auditability over banking, legal and healthcare documents, with continuous evaluation built in.",
+          metrics: [
+            "Hybrid Retrieval",
+            "RAGAS Quality Gates",
+            "Citation-Grounded"
+          ],
+          highlights: [
+            "Hybrid search combining dense vectors (pgvector with HNSW index) and sparse BM25 keyword search.",
+            "Reciprocal Rank Fusion (RRF) to merge dense/sparse rankings + cross-encoder reranking for top-precision context.",
+            "Continuous evaluation with RAGAS (faithfulness, answer relevance, context precision/recall) and Langfuse tracing.",
+            "Evaluation harness with quality gates on faithfulness, relevance, and groundedness — only evaluated configurations are promoted Dev → QA → Production.",
+            "FastAPI service with authentication, rate limiting, and structured audit logging.",
+            "Containerized with Docker for repeatable, deterministic deployment across hybrid cloud environments."
+          ],
+          tech: [
+            "Python", "pgvector (HNSW)", "BM25", "Cross-Encoder", 
+            "Hugging Face Transformers", "FastAPI", "RAGAS", "Langfuse", "Docker"
+          ],
+          flowSteps: [
+            "User Query",
+            "Dense (pgvector) + Sparse (BM25)",
+            "Reciprocal Rank Fusion",
+            "Cross-Encoder Rerank",
+            "LLM + Citation Grounding",
+            "RAGAS Eval & Langfuse Trace"
+          ]
+        },
+        {
+          id: "doc-intel",
+          number: "03",
+          title: "Multi-Agent Document Intelligence",
+          subtitle: "Compliance Assistant with Humans in Control",
+          tag: "Multi-Agent System",
+          overview: "A supervisor-coordinated multi-agent system for banking, legal and healthcare clients that retrieves documents, analyses policies and contracts, checks compliance and generates summaries with full traceability.",
+          metrics: [
+            "4 Specialised Agents",
+            "HITL Approval",
+            "Full Audit Trail"
+          ],
+          highlights: [
+            "4 specialised agents: Document Retrieval, Policy & Legal Analysis, Compliance Checking, and Summary Generation.",
+            "Supervisor orchestration pattern with human-in-the-loop gates for high-risk regulatory outputs.",
+            "Hybrid search + reranking as the knowledge backbone, with citation grounding on every single response.",
+            "PII redaction and complete audit trails to meet regulated banking, healthcare and legal confidentiality requirements.",
+            "Deployed as FastAPI microservices on Kubernetes with Terraform-provisioned AWS cloud resources.",
+            "Evaluation quality gates in CI and complete observability with Langfuse, Prometheus, and Grafana."
+          ],
+          tech: [
+            "LangGraph", "CrewAI", "Amazon Bedrock (Claude 3.5, Titan)", 
+            "Advanced RAG", "FastAPI", "Kubernetes", "Terraform", 
+            "Langfuse", "Prometheus", "Grafana"
+          ],
+          flowSteps: [
+            "User Request",
+            "Supervisor Agent",
+            "[Retrieval | Legal | Compliance | Summary]",
+            "Human Review Gate",
+            "Audited Cited Response"
+          ]
+        }
+      ],
+
+      techCategories: [
+        { id: "all", label: "All" },
+        { id: "genai", label: "GenAI & LLMs" },
+        { id: "agentic", label: "Agentic AI" },
+        { id: "rag", label: "RAG & Vector DBs" },
+        { id: "cloud", label: "Cloud" },
+        { id: "mldl", label: "ML/DL" },
+        { id: "eval", label: "Eval & Safety" },
+        { id: "devops", label: "DevOps" },
+        { id: "backend", label: "Backend & Data" }
+      ],
+
+      skills: [
+        { name: "Amazon Bedrock", cat: "genai", tag: "Cloud AI" },
+        { name: "Claude 3.5", cat: "genai", tag: "LLM" },
+        { name: "Titan Embeddings", cat: "genai", tag: "Embedding" },
+        { name: "Azure OpenAI", cat: "genai", tag: "Cloud" },
+        { name: "OpenAI API", cat: "genai", tag: "Model API" },
+        { name: "Hugging Face", cat: "genai", tag: "Open Source" },
+        { name: "Prompt Engineering", cat: "genai", tag: "LLM" },
+        { name: "Function Calling", cat: "genai", tag: "Tool Use" },
+        { name: "Structured Outputs", cat: "genai", tag: "Reliability" },
+
+        { name: "LangGraph", cat: "agentic", tag: "Stateful Graph" },
+        { name: "CrewAI", cat: "agentic", tag: "Role-Based" },
+        { name: "LangChain", cat: "agentic", tag: "Chains" },
+        { name: "AutoGen", cat: "agentic", tag: "Multi-Agent" },
+        { name: "Bedrock Agents", cat: "agentic", tag: "Managed" },
+        { name: "MCP", cat: "agentic", tag: "Protocol" },
+        { name: "FastMCP", cat: "agentic", tag: "Tool Server" },
+        { name: "ReAct Pattern", cat: "agentic", tag: "Reasoning" },
+        { name: "HITL Gates", cat: "agentic", tag: "Governance" },
+
+        { name: "pgvector (HNSW)", cat: "rag", tag: "Vector DB" },
+        { name: "FAISS", cat: "rag", tag: "Dense Index" },
+        { name: "Pinecone", cat: "rag", tag: "Managed DB" },
+        { name: "OpenSearch", cat: "rag", tag: "Hybrid Search" },
+        { name: "Azure AI Search", cat: "rag", tag: "Hybrid" },
+        { name: "Bedrock KB", cat: "rag", tag: "Managed RAG" },
+        { name: "BM25 Keyword", cat: "rag", tag: "Sparse Search" },
+        { name: "Reciprocal Rank Fusion", cat: "rag", tag: "RRF" },
+        { name: "Cross-Encoders", cat: "rag", tag: "Reranking" },
+
+        { name: "AWS Bedrock", cat: "cloud", tag: "AWS" },
+        { name: "AWS SageMaker", cat: "cloud", tag: "AWS" },
+        { name: "AWS Lambda", cat: "cloud", tag: "Serverless" },
+        { name: "ECS Fargate", cat: "cloud", tag: "Containers" },
+        { name: "Amazon RDS", cat: "cloud", tag: "PostgreSQL" },
+        { name: "Amazon S3", cat: "cloud", tag: "Storage" },
+        { name: "Azure AI Foundry", cat: "cloud", tag: "Azure" },
+        { name: "AKS", cat: "cloud", tag: "Kubernetes" },
+        { name: "Azure Functions", cat: "cloud", tag: "Serverless" },
+
+        { name: "PyTorch", cat: "mldl", tag: "Deep Learning" },
+        { name: "scikit-learn", cat: "mldl", tag: "Classical ML" },
+        { name: "QLoRA / LoRA", cat: "mldl", tag: "Fine-Tuning" },
+        { name: "PEFT", cat: "mldl", tag: "Hugging Face" },
+        { name: "vLLM", cat: "mldl", tag: "High Throughput" },
+        { name: "llama.cpp", cat: "mldl", tag: "GGUF Serving" },
+        { name: "AWQ Quantization", cat: "mldl", tag: "Compression" },
+        { name: "MLflow", cat: "mldl", tag: "Tracking" },
+        { name: "Isolation Forest", cat: "mldl", tag: "Anomaly" },
+
+        { name: "RAGAS", cat: "eval", tag: "Evaluation" },
+        { name: "Langfuse", cat: "eval", tag: "Observability" },
+        { name: "PII Redaction", cat: "eval", tag: "Safety" },
+        { name: "Prompt-Injection Defense", cat: "eval", tag: "Security" },
+        { name: "RBAC Allowlists", cat: "eval", tag: "Access Control" },
+
+        { name: "Terraform", cat: "devops", tag: "IaC" },
+        { name: "Kubernetes", cat: "devops", tag: "Orchestration" },
+        { name: "Helm", cat: "devops", tag: "Packaging" },
+        { name: "ArgoCD", cat: "devops", tag: "GitOps" },
+        { name: "GitHub Actions", cat: "devops", tag: "CI/CD" },
+        { name: "Trivy", cat: "devops", tag: "Security Scan" },
+        { name: "Prometheus", cat: "devops", tag: "Monitoring" },
+        { name: "Grafana", cat: "devops", tag: "Dashboards" },
+
+        { name: "Python", cat: "backend", tag: "Primary" },
+        { name: "FastAPI", cat: "backend", tag: "Async API" },
+        { name: "Pydantic", cat: "backend", tag: "Validation" },
+        { name: "PostgreSQL", cat: "backend", tag: "Database" },
+        { name: "Redis", cat: "backend", tag: "Cache & State" },
+        { name: "Kafka", cat: "backend", tag: "Streaming" },
+        { name: "Power BI", cat: "backend", tag: "BI" }
+      ]
+    };
+
+    // Typewriter
+    const typewriterElem = document.getElementById("typewriter");
+    let roleIdx = 0, charIdx = 0, isDeleting = false;
+    const typingSpeed = 70, pauseTime = 1800;
+
+    function runTypewriter() {
+      const currentRole = PORTFOLIO_CONFIG.hero.roles[roleIdx];
+      if (isDeleting) {
+        typewriterElem.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typewriterElem.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+      }
+      let delta = isDeleting ? typingSpeed / 2 : typingSpeed;
+      if (!isDeleting && charIdx === currentRole.length) {
+        delta = pauseTime;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % PORTFOLIO_CONFIG.hero.roles.length;
+        delta = 400;
+      }
+      setTimeout(runTypewriter, delta);
+    }
+
+    // Canvas Particles
+    const canvas = document.getElementById("neural-canvas");
+    const ctx = canvas.getContext("2d");
+    let width, height, particles = [];
+    const mouse = { x: null, y: null, radius: 140 };
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.7;
+        this.vy = (Math.random() - 0.5) * 0.7;
+        this.radius = Math.random() * 2 + 1.2;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+        if (mouse.x !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x -= (dx / dist) * force * 2.5;
+            this.y -= (dy / dist) * force * 2.5;
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(34, 211, 238, 0.65)";
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.min(Math.floor((width * height) / 14000), 75);
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            const alpha = (1 - dist / 120) * 0.25;
+            ctx.strokeStyle = `rgba(124, 92, 255, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener("resize", () => { resizeCanvas(); initParticles(); });
+    window.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    window.addEventListener("mouseleave", () => { mouse.x = null; mouse.y = null; });
+
+    // Counters
+    function animateCounters() {
+      document.querySelectorAll('.counter').forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let count = 0;
+        const increment = target / 35;
+        const updateCount = () => {
+          count += increment;
+          if (count < target) {
+            counter.innerText = Math.ceil(count);
+            setTimeout(updateCount, 40);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+    }
+
+    // Projects Render
+    function renderProjects() {
+      const container = document.getElementById("projects-container");
+      container.innerHTML = PORTFOLIO_CONFIG.projects.map((p) => `
+        <div class="glass-card rounded-3xl border border-borderDark p-6 sm:p-10 cursor-pointer relative group overflow-hidden" onclick="openModal('${p.id}')">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono font-bold px-3 py-1 rounded-full bg-violetAccent/15 text-violetAccent border border-violetAccent/30">
+                PROJ_${p.number}
+              </span>
+              <span class="text-xs font-mono uppercase tracking-widest text-cyanAccent">${p.tag}</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              ${p.metrics.map(m => `
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-900 border border-slate-700 text-slate-300">
+                  ✦ ${m}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <h3 class="text-2xl sm:text-4xl font-heading font-extrabold text-white mb-2 group-hover:text-cyanAccent transition-colors">
+            ${p.title}
+          </h3>
+          <p class="text-cyanAccent font-medium text-sm sm:text-base mb-4 font-heading">${p.subtitle}</p>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 max-w-4xl">
+            ${p.overview}
+          </p>
+
+          <ul class="text-xs sm:text-sm text-slate-400 space-y-2 mb-8">
+            ${p.highlights.slice(0, 3).map(h => `<li class="flex items-start gap-2">
+              <span class="text-cyanAccent mt-0.5">▸</span>
+              <span>${h}</span>
+            </li>`).join('')}
+          </ul>
+
+          <div class="mb-8 p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80 overflow-x-auto">
+            <div class="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Architecture Pipeline Flow</span>
+            </div>
+            <div class="flex items-center gap-2 min-w-max">
+              ${p.flowSteps.map((step, idx) => `
+                <div class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700/80 text-xs font-mono text-slate-200 shadow-sm flex items-center gap-2">
+                  <span class="text-violetAccent font-bold">${idx + 1}.</span>
+                  <span>${step}</span>
+                </div>
+                ${idx < p.flowSteps.length - 1 ? `
+                  <svg class="w-4 h-4 text-cyanAccent shrink-0 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                ` : ''}
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-800">
+            <div class="flex flex-wrap gap-1.5 max-w-2xl">
+              ${p.tech.map(t => `
+                <span class="px-2.5 py-1 rounded-lg text-xs font-mono bg-slate-800/60 text-slate-300 border border-slate-700/60">
+                  ${t}
+                </span>
+              `).join('')}
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button class="px-4 py-2 rounded-xl text-xs font-heading font-semibold text-white gradient-accent hover:opacity-90 shadow-md">
+                Case Study & Architecture ↗
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal
+    function openModal(projectId) {
+      const p = PORTFOLIO_CONFIG.projects.find(item => item.id === projectId);
+      if (!p) return;
+      document.getElementById("modal-content").innerHTML = `
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-mono px-3 py-1 rounded-full bg-violetAccent/20 text-violetAccent font-bold">
+              PROJ_${p.number}
+            </span>
+            <span class="text-xs font-mono text-cyanAccent uppercase tracking-widest">${p.tag}</span>
+          </div>
+
+          <h3 class="text-3xl font-heading font-extrabold text-white">${p.title}</h3>
+          <p class="text-cyanAccent font-heading font-medium text-lg">${p.subtitle}</p>
+          <p class="text-slate-300 leading-relaxed text-sm sm:text-base">${p.overview}</p>
+
+          <div class="flex flex-wrap gap-2">
+            ${p.metrics.map(m => `
+              <span class="px-3 py-1 rounded-lg text-xs font-mono bg-cyanAccent/10 text-cyanAccent border border-cyanAccent/30 font-semibold">
+                ✓ ${m}
+              </span>
+            `).join('')}
+          </div>
+
+          <div>
+            <h4 class="text-sm font-mono uppercase tracking-wider text-slate-400 mb-3 font-semibold">Technical Highlights & Deliverables:</h4>
+            <ul class="space-y-2.5 text-sm text-slate-300">
+              ${p.highlights.map(h => `
+                <li class="flex items-start gap-2.5">
+                  <span class="text-violetAccent font-bold">▹</span>
+                  <span>${h}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-mono uppercase tracking-wider text-slate-400 mb-3 font-semibold">Production Tech Stack:</h4>
+            <div class="flex flex-wrap gap-2">
+              ${p.tech.map(t => `
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800 text-slate-200 border border-slate-700">
+                  ${t}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-3 pt-4 border-t border-slate-800">
+            <a href="https://github.com" target="_blank" class="px-5 py-2.5 rounded-xl text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-white flex items-center gap-2 border border-slate-700">
+              <span>View Repository (Placeholder)</span> ↗
+            </a>
+            <button onclick="showToast('Case study documentation is ready to share upon request.')" class="px-5 py-2.5 rounded-xl text-xs font-mono font-bold gradient-accent text-white">
+              Request Full Spec Sheet
+            </button>
+          </div>
+        </div>
+      `;
+      document.getElementById("project-modal").classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      document.getElementById("project-modal").classList.add("hidden");
+      document.body.style.overflow = "auto";
+    }
+    document.getElementById("project-modal").addEventListener("click", function(e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeModal(); });
+
+    // Tech Filters
+    let currentFilter = "all";
+    function renderTechFilters() {
+      document.getElementById("tech-filters").innerHTML = PORTFOLIO_CONFIG.techCategories.map(cat => `
+        <button onclick="setFilter('${cat.id}')" class="px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all ${
+          currentFilter === cat.id 
+            ? 'gradient-accent text-white shadow-md shadow-violetAccent/20' 
+            : 'glass-card text-slate-400 hover:text-white border border-borderDark'
+        }">
+          ${cat.label}
+        </button>
+      `).join('');
+    }
+
+    function renderTechGrid() {
+      const filtered = currentFilter === "all" 
+        ? PORTFOLIO_CONFIG.skills 
+        : PORTFOLIO_CONFIG.skills.filter(s => s.cat === currentFilter);
+      document.getElementById("tech-grid").innerHTML = filtered.map(s => `
+        <div class="glass-card p-3.5 rounded-xl border border-borderDark flex flex-col justify-between hover:border-cyanAccent/50 transition group">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-slate-500 mb-1 group-hover:text-cyanAccent transition-colors">
+            ${s.tag}
+          </div>
+          <div class="text-xs sm:text-sm font-heading font-semibold text-slate-200 group-hover:text-white">
+            ${s.name}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setFilter(catId) {
+      currentFilter = catId;
+      renderTechFilters();
+      renderTechGrid();
+    }
+
+    function toggleAccordion(id) {
+      const elem = document.getElementById(id);
+      const arrow = document.getElementById(`${id}-arrow`);
+      if (elem.classList.contains("hidden")) {
+        elem.classList.remove("hidden");
+        arrow.textContent = "▲";
+      } else {
+        elem.classList.add("hidden");
+        arrow.textContent = "▼";
+      }
+    }
+
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toast-msg").textContent = message;
+      document.getElementById("toast-icon").textContent = isSuccess ? "✓" : "ℹ";
+      toast.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
+      setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+      }, 3500);
+    }
+
+    function copyEmail() {
+      navigator.clipboard.writeText(PORTFOLIO_CONFIG.hero.email)
+        .then(() => showToast(`Copied ${PORTFOLIO_CONFIG.hero.email} to clipboard!`))
+        .catch(() => showToast(`Contact: ${PORTFOLIO_CONFIG.hero.email}`));
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      showToast(`Thank you ${name}! Your inquiry has been routed.`);
+      document.getElementById("contact-form").reset();
+    }
+
+    // Theme Switcher
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
+        document.getElementById("theme-icon-sun").classList.add("hidden");
+        document.getElementById("theme-icon-moon").classList.remove("hidden");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.documentElement.classList.add("light");
+        document.getElementById("theme-icon-sun").classList.remove("hidden");
+        document.getElementById("theme-icon-moon").classList.add("hidden");
+        localStorage.setItem("theme", "light");
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(!document.documentElement.classList.contains("dark"));
+    }
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("theme-toggle-mobile").addEventListener("click", toggleTheme);
+
+    function toggleMobileMenu() {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
+    }
+    document.getElementById("mobile-menu-btn").addEventListener("click", toggleMobileMenu);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      applyTheme(savedTheme === "dark");
+      runTypewriter();
+      resizeCanvas();
+      initParticles();
+      animateParticles();
+      renderProjects();
+      renderTechFilters();
+      renderTechGrid();
+      animateCounters();
+    });
+  </script>
+</body>
+</html>
